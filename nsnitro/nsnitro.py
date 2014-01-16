@@ -127,3 +127,21 @@ class NSNitro:
 
                 except NSNitroError, e:
                     raise NSNitroError(nsresponse.message)
+
+        def save(self):
+                """ Saves running configuration """
+                payload = {
+                    "object": json.dumps(
+                        {
+                            "params": {"action": "save"},
+                            "nsconfig": {},
+                        }
+                    )
+                }
+                try:
+                    nsresponse = self.post(payload)
+                    return nsresponse.get_json_response()
+
+                except NSNitroError, e:
+                    raise NSNitroError(nsresponse.message)
+
